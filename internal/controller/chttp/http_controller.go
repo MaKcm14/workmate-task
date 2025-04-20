@@ -2,12 +2,14 @@ package chttp
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log/slog"
 	"net/http"
 
 	"github.com/MaKcm14/workmate-task/internal/entities/dto"
 	"github.com/MaKcm14/workmate-task/internal/services"
+	"github.com/MaKcm14/workmate-task/internal/services/task"
 	"github.com/labstack/echo"
 )
 
@@ -75,9 +77,23 @@ func (c *Controller) handlerTestTask1Result(ctx echo.Context) error {
 
 	_ = request
 
-	// Add here the code of checking the task's status.
+	res, err := c.slver.CheckTask1Status(context.Background(), request)
 
-	return nil
+	if err != nil {
+		requestErr := fmt.Sprintf("error of the %s: %s", op, err)
+		c.log.Warn(requestErr)
+
+		if errors.Is(err, task.ErrTaskResponse) {
+			return ctx.JSON(http.StatusOK, ErrResponse{ErrTaskGetting.Error()})
+		}
+
+		return ctx.JSON(http.StatusInternalServerError, ErrResponse{ErrServerHandling.Error()})
+	}
+
+	return ctx.JSON(http.StatusOK, TaskTestResultResponse{
+		TaskID: request.TaskID,
+		Result: string(res),
+	})
 }
 
 func (c *Controller) Close() {

@@ -9,7 +9,7 @@ import (
 type (
 	TestTaskSolver interface {
 		StartTestTask1(ctx context.Context, request dto.TaskRequest)
-		CheckTaskStatus(ctx context.Context, request dto.TaskRequest) ([]byte, error)
+		CheckTask1Status(ctx context.Context, request dto.TaskRequest) ([]byte, error)
 	}
 
 	Solver interface {
