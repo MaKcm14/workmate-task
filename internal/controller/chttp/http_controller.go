@@ -42,12 +42,11 @@ func (c *Controller) Run(socket string) {
 }
 
 func (c *Controller) config() {
-	c.contr.POST("/test/task1", c.handlerTestTask1)
-	c.contr.POST("/results/test/task1", c.handlerTestTask1Result)
+	c.contr.POST("/test/task1", c.testTask1Handler)
+	c.contr.POST("/results/test/task1", c.testTask1ResultHandler)
 }
 
-// POST-запрос, который может содержать в теле все необходимые параметры для выполнения задачи.
-func (c *Controller) handlerTestTask1(ctx echo.Context) error {
+func (c *Controller) testTask1Handler(ctx echo.Context) error {
 	request := dto.TaskRequest{
 		TaskID: c.taskID,
 	}
@@ -56,15 +55,10 @@ func (c *Controller) handlerTestTask1(ctx echo.Context) error {
 	c.taskID++
 	go c.slver.StartTestTask1(context.Background(), request)
 
-	return ctx.JSON(http.StatusAccepted, TaskResponse{taskID})
+	return ctx.JSON(http.StatusAccepted, TaskInfoResponse{taskID})
 }
 
-// POST-запрос, в котором передается taskID клиента.
-//
-//	{
-//	    "task_id" : task_id
-//	}
-func (c *Controller) handlerTestTask1Result(ctx echo.Context) error {
+func (c *Controller) testTask1ResultHandler(ctx echo.Context) error {
 	const op = "chttp.handler-test-task-1-result"
 
 	request, err := parseRequest(ctx)
@@ -88,7 +82,7 @@ func (c *Controller) handlerTestTask1Result(ctx echo.Context) error {
 		return ctx.JSON(http.StatusInternalServerError, ErrResponse{ErrServerHandling.Error()})
 	}
 
-	return ctx.JSON(http.StatusOK, TaskTestResultResponse{
+	return ctx.JSON(http.StatusOK, TaskTest1ResultResponse{
 		TaskID: request.TaskID,
 		Result: res,
 	})

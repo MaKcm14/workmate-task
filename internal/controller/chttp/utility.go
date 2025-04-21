@@ -1,10 +1,10 @@
 package chttp
 
-type TaskResponse struct {
+type TaskInfoResponse struct {
 	TaskID int `json:"task_id"`
 }
 
-type TaskTestResultResponse struct {
+type TaskTest1ResultResponse struct {
 	TaskID int    `json:"task_id"`
 	Result string `json:"result"`
 }

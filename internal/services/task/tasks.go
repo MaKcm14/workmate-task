@@ -7,12 +7,12 @@ import (
 )
 
 type TaskStarter struct {
-	task1Starter
+	testTask1Starter
 }
 
-func NewStarter(log *slog.Logger, repo services.Repository) *TaskStarter {
+func NewStarter(log *slog.Logger, repo services.TaskRepo) *TaskStarter {
 	return &TaskStarter{
-		task1Starter: task1Starter{
+		testTask1Starter: testTask1Starter{
 			log:  log,
 			repo: repo,
 		},

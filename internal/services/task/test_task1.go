@@ -10,12 +10,12 @@ import (
 	"github.com/MaKcm14/workmate-task/internal/services"
 )
 
-type task1Starter struct {
+type testTask1Starter struct {
 	log  *slog.Logger
-	repo services.Repository
+	repo services.TaskRepo
 }
 
-func (t *task1Starter) StartTestTask1(ctx context.Context, request dto.TaskRequest) {
+func (t *testTask1Starter) StartTestTask1(ctx context.Context, request dto.TaskRequest) {
 	const op = "task.start-test-task1"
 
 	time.Sleep(time.Minute)
@@ -27,7 +27,7 @@ func (t *task1Starter) StartTestTask1(ctx context.Context, request dto.TaskReque
 	}
 }
 
-func (t *task1Starter) CheckTask1Status(ctx context.Context, request dto.TaskRequest) (string, error) {
+func (t *testTask1Starter) CheckTask1Status(ctx context.Context, request dto.TaskRequest) (string, error) {
 	const op = "task.check-task-status"
 
 	if t.repo.IsTaskExists(ctx, request.TaskID) {

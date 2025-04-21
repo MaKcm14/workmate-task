@@ -7,7 +7,7 @@ import (
 )
 
 type RedisRepo struct {
-	task1Repo
+	testTask1Repo
 }
 
 func New(ctx context.Context, log *slog.Logger, pwd, socket string) (RedisRepo, error) {
@@ -18,7 +18,7 @@ func New(ctx context.Context, log *slog.Logger, pwd, socket string) (RedisRepo, 
 	}
 
 	return RedisRepo{
-		task1Repo: task1Repo{conf},
+		testTask1Repo: testTask1Repo{conf},
 	}, nil
 }
 
