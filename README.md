@@ -38,4 +38,10 @@
 ## Запуск
 Приложение развертывается через Docker.
 
-1. 
+1. `git clone https://github.com/MaKcm14/workmate-task.git`
+2. `cd workmate-task`
+3. `docker compose build`
+4. `docker compose up`
+
+### P.S.
+Основная конфигурация сервиса прописывается в `.env` файле из корня проекта. 
