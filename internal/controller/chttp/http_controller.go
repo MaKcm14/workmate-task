@@ -42,21 +42,21 @@ func (c *Controller) Run(socket string) {
 }
 
 func (c *Controller) config() {
-	// controller's PATH config here.
 	c.contr.POST("/test/task1", c.handlerTestTask1)
 	c.contr.POST("/results/test/task1", c.handlerTestTask1Result)
 }
 
 // POST-запрос, который может содержать в теле все необходимые параметры для выполнения задачи.
 func (c *Controller) handlerTestTask1(ctx echo.Context) error {
-	const op = "chttp.handler-test-task-1"
+	request := dto.TaskRequest{
+		TaskID: c.taskID,
+	}
+	taskID := c.taskID
 
-	request := dto.TaskRequest{c.taskID}
 	c.taskID++
-
 	go c.slver.StartTestTask1(context.Background(), request)
 
-	return ctx.JSON(http.StatusAccepted, TaskResponse{c.taskID})
+	return ctx.JSON(http.StatusAccepted, TaskResponse{taskID})
 }
 
 // POST-запрос, в котором передается taskID клиента.
@@ -75,8 +75,6 @@ func (c *Controller) handlerTestTask1Result(ctx echo.Context) error {
 		return ctx.JSON(http.StatusBadRequest, ErrResponse{requestErr})
 	}
 
-	_ = request
-
 	res, err := c.slver.CheckTask1Status(context.Background(), request)
 
 	if err != nil {
@@ -92,7 +90,7 @@ func (c *Controller) handlerTestTask1Result(ctx echo.Context) error {
 
 	return ctx.JSON(http.StatusOK, TaskTestResultResponse{
 		TaskID: request.TaskID,
-		Result: string(res),
+		Result: res,
 	})
 }
 

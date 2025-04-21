@@ -3,6 +3,7 @@ module github.com/MaKcm14/workmate-task
 go 1.23.1
 
 require (
+	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/redis/go-redis/v9 v9.7.3
 )

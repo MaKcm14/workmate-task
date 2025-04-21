@@ -12,4 +12,6 @@ WORKDIR /task_service/cmd/app
 
 VOLUME /task_service/logs
 
+EXPOSE 8080
+
 ENTRYPOINT ["go", "run", "main.go"]

@@ -4,14 +4,17 @@ services:
       
       container_name: redis
 
+      ports:
+          - 8080:8080
 
-    price-service-tg-bot:
+
+    task-service:
         container_name: task-service
 
         build: .
 
         volumes:
-          - task-service-volume:/task-service/logs
+          - task-service-volume:/task_service/logs
 
         network_mode: container:redis
 

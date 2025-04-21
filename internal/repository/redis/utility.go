@@ -8,6 +8,10 @@ import (
 	"github.com/redis/go-redis/v9"
 )
 
+const (
+	tasksResKey = "tasks:results"
+)
+
 type redisConfig struct {
 	conn *redis.Client
 	log  *slog.Logger

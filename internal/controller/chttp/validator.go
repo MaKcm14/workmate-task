@@ -13,8 +13,8 @@ func parseRequest(ctx echo.Context) (dto.TaskRequest, error) {
 	request := dto.TaskRequest{}
 
 	if err := ctx.Bind(&request); err != nil {
-		return request, fmt.Errorf("error of the %s: %s", op, err)
+		return dto.TaskRequest{}, fmt.Errorf("error of the %s: %s", op, err)
 	}
 
-	return dto.TaskRequest{}, nil
+	return request, nil
 }

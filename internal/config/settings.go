@@ -36,12 +36,7 @@ func ConfigSocket(st *Settings, log *slog.Logger) error {
 }
 
 func ConfigRedis(st *Settings, log *slog.Logger) error {
-	pwd, err := configEnv("REDIS_PWD")
-
-	if err != nil {
-		log.Error(err.Error())
-		return err
-	}
+	pwd, _ := configEnv("REDIS_PWD")
 	st.RedisPWD = pwd
 
 	socket, err := configEnv("REDIS_SOCKET")

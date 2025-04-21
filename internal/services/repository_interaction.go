@@ -8,11 +8,11 @@ type (
 	}
 
 	Getter interface {
-		GetTask1Result(ctx context.Context, taskID int) ([]byte, error)
+		GetTask1Result(ctx context.Context, taskID int) (string, error)
 	}
 
 	Modifier interface {
-		SetTask1Result(ctx context.Context, taskID int, res []byte) error
+		SetTask1Result(ctx context.Context, taskID int, res string) error
 		DeleteTask1ID(ctx context.Context, taskID int) error
 	}
 

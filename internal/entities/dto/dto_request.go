@@ -1,5 +1,5 @@
 package dto
 
 type TaskRequest struct {
-	TaskID int
+	TaskID int `json:"task_id"`
 }
