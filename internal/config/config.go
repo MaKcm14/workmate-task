@@ -7,7 +7,6 @@ import (
 	"github.com/joho/godotenv"
 )
 
-// Settings defines the app's settings.
 type Settings struct {
 	Socket string
 

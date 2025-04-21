@@ -15,7 +15,6 @@ import (
 	"github.com/labstack/echo"
 )
 
-// Service defines the main app's services.
 type Service struct {
 	logFile *os.File
 	log     *slog.Logger
@@ -61,7 +60,6 @@ func NewService() Service {
 	}
 }
 
-// Run starts the app.
 func (s *Service) Run() {
 	defer s.close()
 	defer s.log.Info("the app was FULLY STOPPED")

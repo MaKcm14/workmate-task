@@ -8,7 +8,6 @@ import (
 
 type ConfigOpt func(*Settings, *slog.Logger) error
 
-// configEnv defines the logic of ENV vars' configurations.
 func configEnv(key string) (string, error) {
 	const op = "config.config-env"
 
@@ -22,7 +21,6 @@ func configEnv(key string) (string, error) {
 	return val, nil
 }
 
-// ConfigSocket defines the logic of socket configuration.
 func ConfigSocket(st *Settings, log *slog.Logger) error {
 	socket, err := configEnv("SOCKET")
 
